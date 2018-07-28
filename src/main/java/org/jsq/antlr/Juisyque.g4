@@ -1,95 +1,243 @@
 grammar Juisyque;
 
+//options {tokenVocab = JuisyqueLex;}
 
-stmt: simple_stmt | compound_stmt;
+stmt: simple_stmt ; // | compound_stmt;
 
 simple_stmt
 :
-    small_stmt(';' small_stmt)* ';'
+    small_stmt(SEMI small_stmt)* SEMI
 ;
 
 small_stmt
 :
-    expr_stmt
+    assignment
+    |expr
 ;
 
-expr_stmt
+assignment
 :
-    test (augassign test|('=' test))
+    variable ASSIGN expr
 ;
 
-augassign: '+=';
-
-test
+variable
 :
-    expr (comp_op expr)*
+    DOLLAR ID
 ;
-
-comp_op: '<'|'>'|'=='|'>='|'<='|'<>'|'!='|'in'|'not' 'in';
 
 expr
 :
-    atom_expr
-;
-
-atom_expr
-:
     atom
+    |expr COMP_OP expr
+    |expr OP expr
 ;
 
 atom
 :
-    NAME
-    |NOTE
-    |CHORD
-    |EVENT
-    |BAR
+    LPAREN expr RPAREN
+    |note
+    |chord
+    |vector
+    |matrix
+    |dict
+    |variable
+    |STRING
+    |NUMBER
 ;
 
-compound_stmt
+note
 :
-    'TODO10'
+    NOTE_SYMBOL
 ;
 
-NOTE
+chord
 :
-    PITCH_SYMBOL OCTAL_SYMBOL
+    LPAREN RPAREN
+    | LPAREN chord_element (COMMA chord_element)* RPAREN
 ;
 
-CHORD
+chord_element
 :
-    'TODO0'
+    note
+    |variable
 ;
 
-EVENT
+vector
 :
-    'TODO1'
+    LBRACK RBRACK
+    | LBRACK vector_element (COMMA vector_element)* RBRACK
+    //| LBRACK vector_element ((COMMA vector_element)*|(SPACE vector_element)) RBRACK
 ;
 
-BAR
+vector_element
 :
-    'TODO2'
+    vector
+    |chord
+    |note
+    |variable
 ;
 
-NAME
+matrix
 :
-    '$' ID_START ID_CONTINUE*
+    LBRACK SEMI RBRACK
+    | LBRACK matrix_row ( SEMI RBRACK
+                       |( SEMI matrix_row )+ RBRACK )
 ;
+
+matrix_row
+:
+    vector
+    |variable
+;
+
+dict
+:
+    LBRACE RBRACE
+    |LBRACE dict_pair (COMMA dict_pair)* RBRACE
+;
+
+dict_pair
+:
+    STRING COLON expr
+;
+
+
+
+// DSL important tokens
+
+STRING :
+    '\'' .*? '\''
+    | '"' .*? '"'
+;
+
+NUMBER
+:
+    INT
+    |FLOAT
+;
+
+NOTE_SYMBOL
+:
+    PITCH (OCTAVE)?
+;
+PITCH
+:
+    [a-gA-G] (PLUS|MINUS)?
+    | [tTrR]
+;
+
+OCTAVE
+:
+    [oO] (PLUS|MINUS)? INT
+;
+
+
+// Symbols
+DOLLAR : '$' ;
+
+COLON : ':' ;
+
+COMP_OP: LT|GT|EQUALS|GE|LE|NE|IN|NIN;
+
+OP: PLUS|MINUS|MTIMES|RDIVIDE|NORMDIVIDE;
+
+ASSIGN : '=' ;
+
+EQUALS : '==' ;
+
+NE : '!=' | '<>' ;
+
+GT : '>' ;
+
+LT : '<' ;
+
+GE : '>=' ;
+
+LE : '<=' ;
+
+IN : 'in' ;
+
+NIN : 'not in' ;
+
+PLUS : '+' ;
+
+MINUS : '-' ;
+
+DOT : '.' ;
+
+VECAND : '&' ;
+
+VECOR : '|' ;
+
+SCALAND : '&&' ;
+
+SCALOR : '||' ;
+
+LPAREN : '(' ;
+
+RPAREN : ')' ;
+
+LBRACE : '{' ;
+
+RBRACE : '}' ;
+
+LBRACK : '[' ;
+
+RBRACK : ']' ;
+
+MTIMES : '*' ;
+
+TIMES : '.*' ;
+
+RDIVIDE : '/' ;
+
+LDIVIDE : '\\' ;
+
+MRDIVIDE : './' ;
+
+MLDIVIDE : '.\\' ;
+
+NORMDIVIDE : '//' ;
+
+POW : '.^' ;
+
+MPOW : '^' ;
+
+NOT : '~' ;
+
+TRANS : '.\'' ;
+
+CTRANS : '\'' ;
+
+
+// General rules
+
+INT : DIGIT+;
+
+FLOAT : DIGIT+ '.' DIGIT*
+      | '.' DIGIT+
+      ;
+
+SCI : (INT|FLOAT) 'e' INT ;
+
+ID  : LETTER (LETTER|DIGIT|'_')* ;
+
+COMMA : ',' ;
+
+SEMI  : ';' ;
 
 SKIP_
 :
-    ( SPACES | COMMENT | NEWLINE ) -> skip
+    ( SPACE+ | COMMENT | NEWLINE ) -> skip
 ;
 
+SPACE : [ \t] ;
 
-/*
- * fragments
- */
+fragment
+LETTER  : [a-zA-Z] ;
 
-fragment SPACES
-:
-    [ \t]+
-;
+fragment
+DIGIT   : [0-9] ;
 
 fragment COMMENT
 :
@@ -100,28 +248,4 @@ fragment NEWLINE
 :
     '\r' '\n'?
     | '\n'
-;
-
-
-fragment PITCH_SYMBOL
-:
-    [aAdDgG] ('+'|'-')?
-    | [bBeE] '-'?
-    | [cCfF] '+'?
-    | [tTrR]
-;
-
-fragment OCTAL_SYMBOL
-:
-    'o' [1-8]
-;
-
-fragment ID_START
-:
-    [a-zA-Z_]
-;
-
-fragment ID_CONTINUE
-:
-    ID_START | [0-9]
 ;

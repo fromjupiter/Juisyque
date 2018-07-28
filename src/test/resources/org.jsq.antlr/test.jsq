@@ -1,11 +1,6 @@
+# antlr4 -package org.jsq.antlr Juisyque.g4
+# grun org.jsq.antlr.Juisyque stmt -gui
+
 $gsharp = G+o4;
 
 $gchord = (Go4, Bo4, Do5);
-
-$CEvent = {"pitch":Co4, "intensity":5, "denominator":4};
-$CEvent2 = Co4/4;
-$GEvent = {"pitch":Go4, "intensity":5, "denominator":4};
-$GEvent2 = Go4/4;
-
-
-$myBar = [$CEvent, $CEvent, $GEvent, $GEvent];
