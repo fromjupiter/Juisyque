@@ -51,7 +51,7 @@ public class TestHelper {
         target.add(new ChordNote(cC3, 0.75));
         target.add(new ChordNote(cC3, 0.75));
         target.add(new ChordNote(cF3, 0.75));
-        target.add(new ChordNote(cF3, 0.75));
+        target.add(new SymbolNote(tenuto, 0.75));
         target.add(new ChordNote(cG3, 0.75));
         target.add(new ChordNote(cC3, 0.75));
 

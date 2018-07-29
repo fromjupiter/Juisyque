@@ -3,7 +3,6 @@ package org.jsq.midi;
 import javafx.util.Pair;
 import lombok.Getter;
 import org.jsq.MusicSheet;
-import org.jsq.core.NoteVector;
 import org.jsq.core.basic.Pitch;
 import org.jsq.core.basic.Symbol;
 import org.jsq.core.generic.Vector;
@@ -15,7 +14,6 @@ import org.jsq.exception.JsqInvalidAttributeException;
 
 import javax.sound.midi.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,16 +28,6 @@ public class MidiBuilder {
     private MidiBuilder() {
         scores = new ArrayList<>();
     }
-
-//    protected MidiBuilder(int tickPerBeat){
-//        try{
-//            sequence = new Sequence(Sequence.PPQ, tickPerBeat);
-//            this.tickPerBeat = tickPerBeat;
-//        }catch (InvalidMidiDataException e){
-//            e.printStackTrace();
-//            System.exit(1);
-//        }
-//    }
 
     public MidiBuilder addScore(MusicSheet ms) {
         scores.add(ms);
@@ -106,26 +94,39 @@ public class MidiBuilder {
 
         for (Vector<Note> vec : sheet.getScore()) {
             long tickCursor = 0;
+            List<MidiEvent> offEventsCache = new ArrayList<>();
             for(Note note : vec ) {
+                if (note instanceof SymbolNote && ((SymbolNote)note).getSymbol().getType()== Symbol.Type.TENUTO) {
+                    //update cache
+                    for (MidiEvent event : offEventsCache) {
+                        event.setTick(event.getTick() + MidiHelper.getNoteTick(ppq, sheet.getSpeedMultiplier(), note));
+                    }
+                }else {
+                    //flush cache
+                    offEventsCache.forEach(track::add);
+                    offEventsCache.clear();
+                }
+
                 if(note instanceof PitchNote) {
                     PitchNote pn = (PitchNote) note;
                     track.add(MidiHelper.createNoteEvent(ShortMessage.NOTE_ON,nChannel,pn.getPitch().toMidiKey(), note.getVolume().toMidiVelocity()
                             ,tickCursor));
-                    track.add(MidiHelper.createNoteEvent(ShortMessage.NOTE_OFF,nChannel,pn.getPitch().toMidiKey(), note.getVolume().toMidiVelocity()
+                    offEventsCache.add(MidiHelper.createNoteEvent(ShortMessage.NOTE_OFF,nChannel,pn.getPitch().toMidiKey(), note.getVolume().toMidiVelocity()
                             ,tickCursor+MidiHelper.getNoteTick(ppq, sheet.getSpeedMultiplier(), note)));
                 } else if (note instanceof ChordNote) {
                     ChordNote cn = (ChordNote) note;
                     for (Pitch pitch : cn.getChord()) {
                         track.add(MidiHelper.createNoteEvent(ShortMessage.NOTE_ON,nChannel,pitch.toMidiKey(), note.getVolume().toMidiVelocity()
                                 ,tickCursor));
-                        track.add(MidiHelper.createNoteEvent(ShortMessage.NOTE_OFF,nChannel,pitch.toMidiKey(), note.getVolume().toMidiVelocity()
+                        offEventsCache.add(MidiHelper.createNoteEvent(ShortMessage.NOTE_OFF,nChannel,pitch.toMidiKey(), note.getVolume().toMidiVelocity()
                                 ,tickCursor+MidiHelper.getNoteTick(ppq, sheet.getSpeedMultiplier(), note)));
                     }
-                } else if (note instanceof SymbolNote) {
-                    //TODO: support TENUTO
                 }
                 tickCursor+=MidiHelper.getNoteTick(ppq, sheet.getSpeedMultiplier(), note);
             }
+            //flush cache
+            offEventsCache.forEach(track::add);
+            offEventsCache.clear();
         }
     }
 

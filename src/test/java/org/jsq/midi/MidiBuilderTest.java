@@ -17,7 +17,7 @@ public class MidiBuilderTest {
     @Before
     public void setUp() throws Exception {
         score = new MusicSheet();
-        score.setTempo(70);
+        score.setTempo(120);
         score.setTimeSignature("3/4");
         score.setSpeedMultiplier(1);
 
