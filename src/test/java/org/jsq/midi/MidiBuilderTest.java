@@ -18,8 +18,9 @@ public class MidiBuilderTest {
     public void setUp() throws Exception {
         score = new MusicSheet();
         score.setTempo(120);
-        score.setTimeSignature("3/4");
+        score.setOctaveOffset(1);
         score.setSpeedMultiplier(1);
+        score.setTimeSignature("3/4");
 
         NoteVector chords = new NoteVector(TestHelper.getTestChords());
         NoteVector melody = new NoteVector(TestHelper.getTestMelody());

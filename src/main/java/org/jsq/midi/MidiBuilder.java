@@ -65,6 +65,7 @@ public class MidiBuilder {
     private void writeSheet(MusicSheet sheet) throws Exception {
         Track track = sequence.createTrack();
         int ppq = sequence.getResolution();
+        int offset = sheet.getOctaveOffset();
 
         //set tempo
         int mpq = 60000000/sheet.getTempo();
@@ -109,16 +110,16 @@ public class MidiBuilder {
 
                 if(note instanceof PitchNote) {
                     PitchNote pn = (PitchNote) note;
-                    track.add(MidiHelper.createNoteEvent(ShortMessage.NOTE_ON,nChannel,pn.getPitch().toMidiKey(), note.getVolume().toMidiVelocity()
+                    track.add(MidiHelper.createNoteEvent(ShortMessage.NOTE_ON,nChannel,pn.getPitch().toMidiKey(offset), note.getVolume().toMidiVelocity()
                             ,tickCursor));
-                    offEventsCache.add(MidiHelper.createNoteEvent(ShortMessage.NOTE_OFF,nChannel,pn.getPitch().toMidiKey(), note.getVolume().toMidiVelocity()
+                    offEventsCache.add(MidiHelper.createNoteEvent(ShortMessage.NOTE_OFF,nChannel,pn.getPitch().toMidiKey(offset), note.getVolume().toMidiVelocity()
                             ,tickCursor+MidiHelper.getNoteTick(ppq, sheet.getSpeedMultiplier(), note)));
                 } else if (note instanceof ChordNote) {
                     ChordNote cn = (ChordNote) note;
                     for (Pitch pitch : cn.getChord()) {
-                        track.add(MidiHelper.createNoteEvent(ShortMessage.NOTE_ON,nChannel,pitch.toMidiKey(), note.getVolume().toMidiVelocity()
+                        track.add(MidiHelper.createNoteEvent(ShortMessage.NOTE_ON,nChannel,pitch.toMidiKey(offset), note.getVolume().toMidiVelocity()
                                 ,tickCursor));
-                        offEventsCache.add(MidiHelper.createNoteEvent(ShortMessage.NOTE_OFF,nChannel,pitch.toMidiKey(), note.getVolume().toMidiVelocity()
+                        offEventsCache.add(MidiHelper.createNoteEvent(ShortMessage.NOTE_OFF,nChannel,pitch.toMidiKey(offset), note.getVolume().toMidiVelocity()
                                 ,tickCursor+MidiHelper.getNoteTick(ppq, sheet.getSpeedMultiplier(), note)));
                     }
                 }

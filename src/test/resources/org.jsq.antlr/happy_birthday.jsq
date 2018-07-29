@@ -1,19 +1,19 @@
 $song = {};
 
-$song["beat"] = "3/4";
+$song["timeSignature"] = "3/4";
 
 ### set base octave as 4
-$song["octave"] = 4;
+$song["octaveOffset"] = 4;
 
 ### set norm
 ### default is 1 (full note)
-$song["norm"] = 1/4;
+$song["speedMultiplier"] = 4;
 
 ### set tempo
-$song["tempo"] = 68;
+$song["tempo"] = 120;
 
 ### other referential info
-$song["tonic"] = "G";
+$song["tonic"] = "C";
 
 
 $melody = [A,G,Co+1,| B,R,G/2,G/2,| A,G,Do+1,| Co+1,R,G/2,G/2,| Go+1,Eo+1,Co+1,| B,A,T,| T,R,Fo+1/2,Fo+1/2,| Eo+1,Co+1,Do+1,| Co+1,R,G/2,G/2];
@@ -29,3 +29,5 @@ $chords = [R,repmat($chords,2),$C,T,T];
 
 ### set score
 $song["score"] = [$melody;$chords];
+
+make($song)

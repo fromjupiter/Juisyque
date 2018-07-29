@@ -77,6 +77,10 @@ public final class Pitch {
      * @return midi key value
      */
     public int toMidiKey(){
-        return (octave +1) * 12 + step.toInt();
+        return toMidiKey(0);
+    }
+
+    public int toMidiKey(int offset) {
+        return (octave + offset + 1) * 12 + step.toInt();
     }
 }
