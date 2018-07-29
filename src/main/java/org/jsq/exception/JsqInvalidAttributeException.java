@@ -9,6 +9,10 @@ public class JsqInvalidAttributeException extends Exception {
         super(msg);
     }
 
+    public JsqInvalidAttributeException(String msg, Throwable cause){
+        super(msg, cause);
+    }
+
     public JsqInvalidAttributeException(int start, int end,String msg){
         super(msg);
         this.start = start;

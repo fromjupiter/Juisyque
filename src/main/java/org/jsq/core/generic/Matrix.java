@@ -18,6 +18,10 @@ public abstract class Matrix<T> extends Vector<Vector<T>> {
         }
     }
 
+    public T get(int vIndex, int hIndex) {
+        return get(vIndex).get(hIndex);
+    }
+
     /*
         A valid matrix require that all rows are at the same length
      */

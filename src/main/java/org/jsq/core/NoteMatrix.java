@@ -19,8 +19,9 @@ public class NoteMatrix extends Matrix<Note> {
         if( elements.isEmpty()
                 || elements.stream().allMatch( t->t.length()==elements.get(0).length())) {
             this.elements = elements;
+        } else {
+            throw new JsqInvalidAttributeException("Note matrix construction failed because given vectors have different length");
         }
-        throw new JsqInvalidAttributeException("Note matrix construction failed because given vectors have different length");
     }
 
     @Override

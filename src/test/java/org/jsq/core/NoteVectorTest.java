@@ -1,16 +1,11 @@
 package org.jsq.core;
 
-import org.jsq.core.basic.Chord;
-import org.jsq.core.basic.Pitch;
 import org.jsq.core.note.ChordNote;
-import org.jsq.core.note.Note;
 import org.jsq.core.note.PitchNote;
 import org.jsq.core.note.SymbolNote;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.List;
 
 import static org.jsq.core.TestHelper.*;
 
@@ -50,12 +45,20 @@ public class NoteVectorTest {
 
     @Test
     public void testLength002() {
-        target.get(0).setBase(2.0);
+        target.get(0).setSpanBase(2.0);
         Assert.assertEquals(3.75, target.length(), 0);
     }
 
     @Test
     public void testLength003() {
         Assert.assertEquals( 1.5, target.slice(0,2).length(), 0);
+    }
+
+    @Test
+    public void testLength004() {
+        NoteVector chords = new NoteVector(TestHelper.getTestChords());
+        NoteVector melody = new NoteVector(TestHelper.getTestMelody());
+        Assert.assertEquals(chords.length(), melody.length(), 0);
+
     }
 }

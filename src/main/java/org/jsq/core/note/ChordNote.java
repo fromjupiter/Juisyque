@@ -13,4 +13,8 @@ public class ChordNote extends Note<Chord> {
         this.timeSpan = span;
     }
 
+    public Chord getChord() {
+        return this.subject;
+    }
+
 }

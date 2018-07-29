@@ -5,6 +5,8 @@ import org.jsq.core.basic.Pitch;
 import org.jsq.core.basic.Symbol;
 import org.jsq.core.note.ChordNote;
 import org.jsq.core.note.Note;
+import org.jsq.core.note.PitchNote;
+import org.jsq.core.note.SymbolNote;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,9 @@ public class TestHelper {
 
         List<Note> target = new ArrayList<>();
 
+
+        target.add(new SymbolNote(rest, 0.25));
+
         target.add(new ChordNote(cC3, 0.75));
         target.add(new ChordNote(cG3, 0.75));
         target.add(new ChordNote(cG3, 0.75));
@@ -48,8 +53,56 @@ public class TestHelper {
         target.add(new ChordNote(cF3, 0.75));
         target.add(new ChordNote(cF3, 0.75));
         target.add(new ChordNote(cG3, 0.75));
-        target.add(new ChordNote(cF3, 0.75));
-        target.add(new ChordNote(cF3, 0.75));
+        target.add(new ChordNote(cC3, 0.75));
+
+        return target;
+    }
+
+    public static List<Note> getTestMelody() {
+
+        List<Note> target = new ArrayList<>();
+
+        target.add(new PitchNote(pSo, 0.125));
+        target.add(new PitchNote(pSo, 0.125));
+
+        target.add(new PitchNote(pLa, 0.25));
+        target.add(new PitchNote(pSo, 0.25));
+        target.add(new PitchNote(pDo2, 0.25));
+
+        target.add(new PitchNote(pSi, 0.25));
+        target.add(new SymbolNote(tenuto, 0.25));
+        target.add(new PitchNote(pSo, 0.125));
+        target.add(new PitchNote(pSo, 0.125));
+
+        target.add(new PitchNote(pLa, 0.25));
+        target.add(new PitchNote(pSo, 0.25));
+        target.add(new PitchNote(pRe2, 0.25));
+
+        target.add(new PitchNote(pDo2, 0.25));
+        target.add(new SymbolNote(tenuto, 0.25));
+        target.add(new PitchNote(pSo, 0.125));
+        target.add(new PitchNote(pSo, 0.125));
+
+        target.add(new PitchNote(pSo2, 0.25));
+        target.add(new PitchNote(pMi2, 0.25));
+        target.add(new PitchNote(pDo2, 0.25));
+
+        target.add(new PitchNote(pSi, 0.25));
+        target.add(new PitchNote(pLa, 0.25));
+        target.add(new SymbolNote(tenuto, 0.25));
+
+        target.add(new SymbolNote(tenuto, 0.25));
+        target.add(new SymbolNote(rest, 0.25));
+        target.add(new PitchNote(pFa2, 0.125));
+        target.add(new PitchNote(pFa2, 0.125));
+
+        target.add(new PitchNote(pMi2, 0.25));
+        target.add(new PitchNote(pDo2, 0.25));
+        target.add(new PitchNote(pRe2, 0.25));
+
+        target.add(new PitchNote(pDo2, 0.25));
+        target.add(new SymbolNote(tenuto, 0.25));
+        target.add(new SymbolNote(rest, 0.25));
 
         return target;
     }

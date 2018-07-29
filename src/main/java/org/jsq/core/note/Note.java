@@ -2,6 +2,7 @@ package org.jsq.core.note;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.jsq.core.basic.Volume;
 
 public abstract class Note<T> implements Temporal {
 
@@ -16,11 +17,15 @@ public abstract class Note<T> implements Temporal {
      */
     @Getter
     @Setter
-    protected Double base = 1.0;
+    protected Double spanBase = 1.0;
+
+    @Getter
+    @Setter
+    protected Volume volume = new Volume(15);
 
     @Override
     public Double getDuration() {
-        return timeSpan * base;
+        return timeSpan * spanBase;
     }
 
     @Override

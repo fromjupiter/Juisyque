@@ -6,9 +6,9 @@ public class Volume {
 
     private int value;
 
-    public Volume(int value) throws JsqInvalidAttributeException {
+    public Volume(int value) {
         if(value < 0 || value > 15)
-            throw new JsqInvalidAttributeException("volume must range 0-15");
+            value = 15;
         this.value = value;
     }
 
