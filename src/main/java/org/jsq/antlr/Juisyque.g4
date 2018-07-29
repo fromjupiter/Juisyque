@@ -17,12 +17,18 @@ small_stmt
 
 assignment
 :
-    variable ASSIGN expr
+    variable (index_expr)? ASSIGN expr
 ;
 
 variable
 :
-    DOLLAR ID
+    DOLLAR name
+;
+
+name
+:
+    ID
+    |NOTE
 ;
 
 expr
@@ -30,6 +36,14 @@ expr
     atom
     |expr COMP_OP expr
     |expr OP expr
+    |expr index_expr
+;
+
+index_expr
+:
+    LBRACK expr RBRACK
+    //slice
+    | LBRACK expr? COLON expr? RBRACK
 ;
 
 atom
@@ -41,13 +55,14 @@ atom
     |matrix
     |dict
     |variable
+    |function_call
     |STRING
     |NUMBER
 ;
 
 note
 :
-    NOTE_SYMBOL
+    NOTE
 ;
 
 chord
@@ -65,29 +80,20 @@ chord_element
 vector
 :
     LBRACK RBRACK
-    | LBRACK vector_element (COMMA vector_element)* RBRACK
+    | LBRACK expr ( (COMMA | bar_delim) expr)* RBRACK
     //| LBRACK vector_element ((COMMA vector_element)*|(SPACE vector_element)) RBRACK
 ;
 
-vector_element
+bar_delim
 :
-    vector
-    |chord
-    |note
-    |variable
+    (COMMA)? VECOR
 ;
 
 matrix
 :
     LBRACK SEMI RBRACK
-    | LBRACK matrix_row ( SEMI RBRACK
-                       |( SEMI matrix_row )+ RBRACK )
-;
-
-matrix_row
-:
-    vector
-    |variable
+    | LBRACK expr ( SEMI RBRACK
+                       |( SEMI expr )+ RBRACK )
 ;
 
 dict
@@ -101,7 +107,25 @@ dict_pair
     STRING COLON expr
 ;
 
+function_call
+:
+    func_name LPAREN args? RPAREN
+;
 
+func_name
+:
+    ID
+;
+
+args
+:
+    arg ( COMMA arg )*
+;
+
+arg
+:
+    expr
+;
 
 // DSL important tokens
 
@@ -114,16 +138,6 @@ NUMBER
 :
     INT
     |FLOAT
-;
-
-NOTE_SYMBOL
-:
-    PITCH (OCTAVE)?
-;
-PITCH
-:
-    [a-gA-G] (PLUS|MINUS)?
-    | [tTrR]
 ;
 
 OCTAVE
@@ -139,7 +153,7 @@ COLON : ':' ;
 
 COMP_OP: LT|GT|EQUALS|GE|LE|NE|IN|NIN;
 
-OP: PLUS|MINUS|MTIMES|RDIVIDE|NORMDIVIDE;
+OP: PLUS|MINUS|MTIMES|RDIVIDE|NORMDIVIDE|NORMTIMES;
 
 ASSIGN : '=' ;
 
@@ -189,6 +203,8 @@ MTIMES : '*' ;
 
 TIMES : '.*' ;
 
+NORMTIMES : '**' ;
+
 RDIVIDE : '/' ;
 
 LDIVIDE : '\\' ;
@@ -220,6 +236,12 @@ FLOAT : DIGIT+ '.' DIGIT*
 
 SCI : (INT|FLOAT) 'e' INT ;
 
+NOTE
+:
+    PITCH_LETTER (PLUS|MINUS)? (OCTAVE)?
+    |EVENT_LETTER
+;
+
 ID  : LETTER (LETTER|DIGIT|'_')* ;
 
 COMMA : ',' ;
@@ -235,6 +257,18 @@ SPACE : [ \t] ;
 
 fragment
 LETTER  : [a-zA-Z] ;
+
+fragment
+PITCH_LETTER
+:
+    [a-gA-G]
+;
+
+fragment
+EVENT_LETTER
+:
+    [tTrR]
+;
 
 fragment
 DIGIT   : [0-9] ;

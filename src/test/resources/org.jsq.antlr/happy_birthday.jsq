@@ -1,4 +1,4 @@
-$song = {}
+$song = {};
 
 $song["beat"] = "3/4";
 
@@ -16,16 +16,16 @@ $song["tempo"] = 68;
 $song["tonic"] = "G";
 
 
-$melody = [A,G,Co+1,| B,R,G/2,G/2,| A,G,Do+1,| Co+1,R,G/2,G/2,| Go+1,Eo+1,Co+1,| B,A,T,| T,R,Fo+1/2,Fo+1/2,| Eo+1,Co+1,Do+1,| Co+1,R,G/2,G/2]
-$melody = [G/2,G/2,$melody,$melody,Co+1,T,R]
+$melody = [A,G,Co+1,| B,R,G/2,G/2,| A,G,Do+1,| Co+1,R,G/2,G/2,| Go+1,Eo+1,Co+1,| B,A,T,| T,R,Fo+1/2,Fo+1/2,| Eo+1,Co+1,Do+1,| Co+1,R,G/2,G/2];
+$melody = [G/2,G/2,$melody,$melody,Co+1,T,R];
 
-$C = (C,E,G)
-$G = (G,B,Do+1)
-$F = (F,A,Co+1)
+$C = (C,E,G);
+$G = (G,B,Do+1);
+$F = (F,A,Co+1);
 
-$chords = [$C,T,T,| $G,T,T,| $G,T,T,| $C,T,T,| $C,T,T| $F,T,T,| $F,T,T,| $G,T,T,| $C,T,T]
-$chords = [R,$chords,$chords,$C,T,T]
-
+$chords = [$C,T,T,| $G,T,T,| $G,T,T,| $C,T,T,| $C,T,T,| $F,T,T,| $F,T,T,| $G,T,T,| $C,T,T];
+#$chords = [R,$chords,$chords,$C,T,T]
+$chords = [R,repmat($chords,2),$C,T,T];
 
 ### set score
-$song["score"] = [$melody;$chords]
+$song["score"] = [$melody;$chords];
