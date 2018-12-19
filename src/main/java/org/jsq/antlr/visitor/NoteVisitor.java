@@ -16,16 +16,8 @@ import java.util.List;
 
 public class NoteVisitor implements StatelessVisitor<JuisyqueParser.NoteContext, Variables, Object> {
 
-    private final static List<String> symbols = Arrays.asList("T","R");
-
     @Override
     public Object visit(JuisyqueParser.NoteContext ctx, Variables world) {
-        TerminalNode node = ctx.NOTE();
-        String noteText = node.getText().toUpperCase();
-        switch(noteText) {
-            case "T":return new SymbolNote(Symbol.construct(Symbol.Type.TENUTO));
-            case "R":return new SymbolNote(Symbol.construct(Symbol.Type.REST));
-            default: return new PitchNote(NoteUtils.makePitch(noteText));
-        }
+        return NoteUtils.makeNote(ctx.NOTE().getText());
     }
 }

@@ -18,6 +18,10 @@ public class Chord implements Iterable<Pitch> {
         this.pitches = Arrays.asList(pitches);
     }
 
+    public Pitch get(int index) {
+        return pitches.get(index);
+    }
+
     @Override
     public Iterator<Pitch> iterator() {
         return pitches.iterator();

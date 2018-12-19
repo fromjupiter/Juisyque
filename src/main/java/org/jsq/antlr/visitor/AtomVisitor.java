@@ -11,7 +11,7 @@ public class AtomVisitor implements StatelessVisitor<JuisyqueParser.AtomContext,
         if(ctx.note()!=null) {
             return new NoteVisitor().visit(ctx.note(),world);
         } else if(ctx.chord()!=null) {
-            throw new UnsupportedOperationException("LATER");
+            return new NoteVisitor().visit(ctx.note(),world);
         } else if(ctx.expr()!=null) {
             return new ExprVisitor().visit(ctx.expr(),world);
         } else if(ctx.dict()!=null) {
