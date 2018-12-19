@@ -1,4 +1,4 @@
-// Generated from Juisyque.g4 by ANTLR 4.7.1
+// Generated from ../Juisyque.g4 by ANTLR 4.7.1
 package org.jsq.antlr.generated;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 

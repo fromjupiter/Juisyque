@@ -12,7 +12,7 @@ public class ExprVisitorTest {
     @Test
     public void testVisit001() throws Exception {
         Juisyque jsq = new Juisyque();
-        String testStr = "$gsharp = G+o4;";
+        String testStr = "$gsharp = G#o4;";
         Object res = jsq.compile(new ByteArrayInputStream(testStr.getBytes()));
 
         Assert.assertTrue(res instanceof Variables);

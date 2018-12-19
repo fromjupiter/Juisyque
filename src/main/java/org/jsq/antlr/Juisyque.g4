@@ -235,7 +235,7 @@ SCI : (INT|FLOAT) 'e' INT ;
 
 NOTE
 :
-    PITCH_LETTER (PLUS|MINUS)? (OCTAVE)?
+    PITCH_LETTER (SHARP|FLAT)? (OCTAVE)?
     |EVENT_LETTER
 ;
 
@@ -258,8 +258,14 @@ LETTER  : [a-zA-Z] ;
 fragment
 PITCH_LETTER
 :
-    [a-gA-G]
+    [A-G]
 ;
+
+fragment
+SHARP : '#';
+
+fragment
+FLAT : 'b';
 
 fragment
 EVENT_LETTER

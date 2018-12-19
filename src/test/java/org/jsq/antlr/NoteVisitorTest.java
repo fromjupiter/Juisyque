@@ -30,7 +30,7 @@ public class NoteVisitorTest {
 
     @Before
     public void setUp() {
-        when(node.getText()).thenReturn("G+o4");
+        when(node.getText()).thenReturn("G#o4");
         when(ctx.NOTE()).thenReturn(node);
     }
 

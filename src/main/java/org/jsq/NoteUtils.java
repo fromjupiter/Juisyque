@@ -1,6 +1,7 @@
 package org.jsq;
 
 import org.jsq.core.basic.Pitch;
+import org.jsq.exception.JsqUnsupportedException;
 
 public class NoteUtils {
     public static Pitch makePitch(String pitchStr) {
@@ -11,7 +12,8 @@ public class NoteUtils {
         if(parts[0].length()==1) {
             step = Pitch.Step.valueOf(parts[0]);
         } else {
-            step = Pitch.Step.valueOf(parts[0].charAt(0) + (parts[0].charAt(1)=='+'? "SHARP":"FLAT"));
+            if('#' != parts[0].charAt(1) && 'B' != parts[0].charAt(1)) throw new JsqUnsupportedException("Note suffix can only be #(sharp) or b(flat)");
+            step = Pitch.Step.valueOf(parts[0].charAt(0) + (parts[0].charAt(1)=='#'? "SHARP":"FLAT"));
         }
         return Pitch.construct(step, octave);
     }
