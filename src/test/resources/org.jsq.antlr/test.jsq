@@ -1,4 +1,4 @@
-# antlr4 -package org.jsq.antlr -visitor -no-listener Juisyque.g4
+# antlr4 -package org.jsq.antlr.generated -visitor -no-listener Juisyque.g4
 # grun org.jsq.antlr.Juisyque stmt -gui
 
 $gsharp = G+o4;

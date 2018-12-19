@@ -1,4 +1,4 @@
-package org.jsq.antlr.parser;
+package org.jsq.antlr.visitor;
 
 public class VectorVisitor {
 }

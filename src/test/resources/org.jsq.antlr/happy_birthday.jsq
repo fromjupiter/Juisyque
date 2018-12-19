@@ -30,4 +30,4 @@ $chords = [R,repmat($chords,2),$C,T,T];
 ### set score
 $song["score"] = [$melody;$chords];
 
-make($song)
+make($song);

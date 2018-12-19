@@ -1,5 +1,5 @@
 // Generated from Juisyque.g4 by ANTLR 4.7.1
-package org.jsq.antlr;
+package org.jsq.antlr.generated;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -17,14 +17,14 @@ public class JuisyqueBaseVisitor<T> extends AbstractParseTreeVisitor<T> implemen
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStmt(JuisyqueParser.StmtContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStmts(JuisyqueParser.StmtsContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSimple_stmt(JuisyqueParser.Simple_stmtContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStmt(JuisyqueParser.StmtContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

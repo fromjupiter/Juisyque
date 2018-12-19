@@ -2,12 +2,9 @@ grammar Juisyque;
 
 //options {tokenVocab = JuisyqueLex;}
 
-stmt: simple_stmt ; // | compound_stmt;
+stmts : stmt * ;
 
-simple_stmt
-:
-    small_stmt(SEMI small_stmt)* SEMI
-;
+stmt: small_stmt SEMI ; // | compound_stmt;
 
 small_stmt
 :

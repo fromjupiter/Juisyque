@@ -13,25 +13,29 @@ import lombok.Getter;
 public final class Pitch {
 
     public enum Step {
-        C (0),
-        CSHARP(1),DFLAT (1),
-        D(2),
-        DSHARP(3),EFLAT (3),
-        E(4), FFLAT(4),
-        F(5), ESHARP(5),
-        FSHARP(6),GFLAT(6),
-        G(7),
-        GSHARP(8),AFLAT(8),
-        A(9),
-        ASHARP(10),BFLAT(10),
-        B(11),CFLAT(11),
-        BSHARP(12)
+        C (0, "C"),
+        CSHARP(1, "C#"),DFLAT (1, "Db"),
+        D(2, "D"),
+        DSHARP(3, "D#"),EFLAT (3, "Eb"),
+        E(4, "E"), FFLAT(4, "Fb"),
+        F(5, "F"), ESHARP(5, "E#"),
+        FSHARP(6, "F#"),GFLAT(6, "Gb"),
+        G(7, "G"),
+        GSHARP(8, "G#"),AFLAT(8, "Ab"),
+        A(9, "A"),
+        ASHARP(10, "A#"),BFLAT(10, "Bb"),
+        B(11, "B"),CFLAT(11, "Cb"),
+        BSHARP(12, "B#")
         ;
-        private int value;
 
-        Step(int i){this.value = i;}
+        private int value;
+        private String str;
+
+        Step(int i,String str){this.value = i; this.str = str;}
 
         public int toInt(){return value;}
+
+        public String toString() {return str;}
     }
 
     @Getter
@@ -51,11 +55,11 @@ public final class Pitch {
 
     @Override
     public String toString(){
-        return step.name();
+        return step.toString();
     }
 
     public String toFullString(){
-        return step.name()+"o"+ octave;
+        return step.toString() + octave;
     }
 
     @Override
@@ -64,7 +68,7 @@ public final class Pitch {
         if(o==null||this.getClass()!=o.getClass()) return false;
         Pitch other = (Pitch)o;
         return octave ==other.octave
-                && step.toInt()==other.step.toInt();
+                && step==other.step;
     }
 
     @Override

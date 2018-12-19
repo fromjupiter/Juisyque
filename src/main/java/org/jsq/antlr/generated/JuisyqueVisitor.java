@@ -1,5 +1,5 @@
 // Generated from Juisyque.g4 by ANTLR 4.7.1
-package org.jsq.antlr;
+package org.jsq.antlr.generated;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -11,17 +11,17 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface JuisyqueVisitor<T> extends ParseTreeVisitor<T> {
 	/**
+	 * Visit a parse tree produced by {@link JuisyqueParser#stmts}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStmts(JuisyqueParser.StmtsContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JuisyqueParser#stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitStmt(JuisyqueParser.StmtContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JuisyqueParser#simple_stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSimple_stmt(JuisyqueParser.Simple_stmtContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JuisyqueParser#small_stmt}.
 	 * @param ctx the parse tree
