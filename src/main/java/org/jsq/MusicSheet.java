@@ -16,11 +16,11 @@ public class MusicSheet {
 
     @Getter
     @Setter
-    private int octaveOffset;
+    private Integer octaveOffset;
 
     @Getter
     @Setter
-    private double speedMultiplier;
+    private Double speedMultiplier;
 
     @Getter
     @Setter
@@ -28,10 +28,10 @@ public class MusicSheet {
 
     @Getter
     @Setter
-    private int tempo;
+    private Integer tempo;
 
-    private int timeSignNumerator;
-    private int timeSignDenominator;
+    private Integer timeSignNumerator;
+    private Integer timeSignDenominator;
 
     @Getter
     private Map<String, String> otherInfo;
@@ -40,7 +40,7 @@ public class MusicSheet {
         otherInfo = new HashMap<>();
         instrument = "Acoustic Grand Piano";
         octaveOffset = 0;
-        speedMultiplier = 1;
+        speedMultiplier = 1.0;
         timeSignDenominator = 4;
         timeSignNumerator = 4;
         tempo = 120;
@@ -53,8 +53,8 @@ public class MusicSheet {
     public void setTimeSignature(String str) throws JsqInvalidAttributeException {
         try {
             String[] res = str.split("/");
-            int numerator = Integer.parseInt(res[0]);
-            int denominator = Integer.parseInt(res[1]);
+            Integer numerator = Integer.parseInt(res[0]);
+            Integer denominator = Integer.parseInt(res[1]);
 
             timeSignNumerator = numerator;
             timeSignDenominator = denominator;

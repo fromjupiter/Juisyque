@@ -21,6 +21,5 @@ public class ChordVisitor implements StatelessVisitor<JuisyqueParser.ChordContex
                 .map(x-> ((Note)x).getPitch())
                 .collect(Collectors.toList())
         );
-
     }
 }

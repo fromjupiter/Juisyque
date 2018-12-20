@@ -43,7 +43,7 @@ public class ChordVisitorTest {
     }
 
     @Test
-    public void visit() {
+    public void testVisit001() {
         Variables variables = new Variables();
         Chord res = (Chord) new ChordVisitor().visit(ctx,variables);
 

@@ -39,9 +39,7 @@ public class Chord extends Temporal<List<Pitch>> implements Iterable<Note> {
         return notes.get(index);
     }
 
-    public List<Pitch> getPitches() {
-        return subject;
-    }
+    public int size() { return notes.size(); }
 
     @Override
     public Iterator<Note> iterator() {
