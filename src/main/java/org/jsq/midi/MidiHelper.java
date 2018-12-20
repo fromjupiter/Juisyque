@@ -3,7 +3,7 @@ package org.jsq.midi;
 import javafx.util.Pair;
 import org.jsq.MusicSheet;
 import org.jsq.core.music.Temporal;
-import org.jsq.exception.JsqInvalidAttributeException;
+import org.jsq.exception.JsqInvalidLogicException;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MetaMessage;
@@ -15,7 +15,7 @@ public class MidiHelper {
 
     private static final int MAX_PPQ_LIMIT = 128;
 
-    public static int getPPQ(List<MusicSheet> sheets) throws JsqInvalidAttributeException {
+    public static int getPPQ(List<MusicSheet> sheets) throws JsqInvalidLogicException {
         double gcd = 1.0;
         //get gcd of all notes
         outer:
@@ -35,16 +35,16 @@ public class MidiHelper {
         //int gcd = scores.get(0).getScore().get(0).
 
         if(result > 128 || Math.abs(Math.round(result) - result) > 1e-5) {
-            throw new JsqInvalidAttributeException("Can't find proper PPQ for the music sheets");
+            throw new JsqInvalidLogicException("Can't find proper PPQ for the music sheets");
         }
 
         return (int) Math.round(result);
     }
 
-    public static int getNoteTick(int ppq, double speedMultiplier, Temporal note) throws JsqInvalidAttributeException {
+    public static int getNoteTick(int ppq, double speedMultiplier, Temporal note) throws JsqInvalidLogicException {
         long result = Math.round( ppq * 4 * note.getTimeSpan() * note.getSpanBase() /speedMultiplier );
         if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
-            throw new JsqInvalidAttributeException(String.format("Calculated tick [%d] of music [%s] is out of boundary",result, note));
+            throw new JsqInvalidLogicException(String.format("Calculated tick [%d] of music [%s] is out of boundary",result, note));
         }
         return (int)result;
     }

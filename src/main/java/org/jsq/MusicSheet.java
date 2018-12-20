@@ -3,7 +3,7 @@ package org.jsq;
 import lombok.Getter;
 import lombok.Setter;
 import org.jsq.core.TemporalMatrix;
-import org.jsq.exception.JsqInvalidAttributeException;
+import org.jsq.exception.JsqInvalidLogicException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,7 +50,7 @@ public class MusicSheet {
         return "" + timeSignNumerator + "/" + timeSignDenominator;
     }
 
-    public void setTimeSignature(String str) throws JsqInvalidAttributeException {
+    public void setTimeSignature(String str) throws JsqInvalidLogicException {
         try {
             String[] res = str.split("/");
             Integer numerator = Integer.parseInt(res[0]);
@@ -59,7 +59,7 @@ public class MusicSheet {
             timeSignNumerator = numerator;
             timeSignDenominator = denominator;
         } catch (Exception ex) {
-            throw new JsqInvalidAttributeException(String.format("Invalid time sign [%s]!",str));
+            throw new JsqInvalidLogicException(String.format("Invalid time sign [%s]!",str));
         }
     }
 

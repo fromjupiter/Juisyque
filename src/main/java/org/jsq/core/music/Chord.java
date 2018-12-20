@@ -1,7 +1,7 @@
 package org.jsq.core.music;
 
 import org.jsq.core.basic.Pitch;
-import org.jsq.exception.JsqInvalidAttributeException;
+import org.jsq.exception.JsqInvalidLogicException;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -30,7 +30,7 @@ public class Chord extends Temporal<List<Pitch>> implements Iterable<Note> {
 
     @Override
     public void setTimeSpan(Double span) {
-        if(span < 0) throw new JsqInvalidAttributeException("Time span should be positive value");
+        if(span < 0) throw new JsqInvalidLogicException("Time span should be positive value");
         timeSpan = span;
         this.notes.forEach(x->x.setTimeSpan(timeSpan));
     }

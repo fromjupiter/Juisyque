@@ -3,7 +3,7 @@ package org.jsq.core;
 import org.jsq.core.generic.Matrix;
 import org.jsq.core.generic.Vector;
 import org.jsq.core.music.Temporal;
-import org.jsq.exception.JsqInvalidAttributeException;
+import org.jsq.exception.JsqInvalidLogicException;
 import org.jsq.exception.JsqUnsupportedException;
 
 import java.util.ArrayList;
@@ -15,12 +15,12 @@ public class TemporalMatrix extends Matrix<Temporal> {
         elements = new ArrayList<>();
     }
 
-    public TemporalMatrix(List<Vector<Temporal>> elements) throws JsqInvalidAttributeException {
+    public TemporalMatrix(List<Vector<Temporal>> elements) throws JsqInvalidLogicException {
         if( elements.isEmpty()
                 || elements.stream().allMatch( t->t.length()==elements.get(0).length())) {
             this.elements = elements;
         } else {
-            throw new JsqInvalidAttributeException("Temporal matrix construction failed because given vectors have different length");
+            throw new JsqInvalidLogicException("Temporal matrix construction failed because given vectors have different length");
         }
     }
 
@@ -36,7 +36,7 @@ public class TemporalMatrix extends Matrix<Temporal> {
     public TemporalMatrix hSlice(int fromIndex, int toIndex) {
         try {
             return new TemporalMatrix(elements.subList(fromIndex, toIndex));
-        } catch (JsqInvalidAttributeException ex) {
+        } catch (JsqInvalidLogicException ex) {
             throw new JsqUnsupportedException("Shouldn't be here!", TemporalMatrix.class, ex);
         }
     }

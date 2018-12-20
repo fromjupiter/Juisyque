@@ -10,7 +10,7 @@ import org.jsq.core.music.Chord;
 import org.jsq.core.music.Temporal;
 import org.jsq.core.music.Note;
 import org.jsq.core.music.ControlTemporal;
-import org.jsq.exception.JsqInvalidAttributeException;
+import org.jsq.exception.JsqInvalidLogicException;
 
 import javax.sound.midi.*;
 import java.io.File;
@@ -53,14 +53,14 @@ public class MidiBuilder {
     }
 
 
-    private void initSequence() throws JsqInvalidAttributeException {
+    private void initSequence() throws JsqInvalidLogicException {
         //calculate Pulses Per Quarter music
         int pulsePerQuarter = MidiHelper.getPPQ(this.scores);
 
         try{
             sequence = new Sequence(Sequence.PPQ, pulsePerQuarter);
         }catch (InvalidMidiDataException e){
-            throw new JsqInvalidAttributeException("Midi Sequence initialization failed!", e);
+            throw new JsqInvalidLogicException("Midi Sequence initialization failed!", e);
         }
     }
 

@@ -2,7 +2,7 @@ package org.jsq.core;
 
 import org.jsq.core.music.Chord;
 import org.jsq.core.music.ControlTemporal;
-import org.jsq.exception.JsqInvalidAttributeException;
+import org.jsq.exception.JsqInvalidLogicException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +38,7 @@ public class TemporalMatrixTest {
         Assert.assertEquals(1, target.size());
     }
 
-    @Test(expected = JsqInvalidAttributeException.class)
+    @Test(expected = JsqInvalidLogicException.class)
     public void testValidate002() throws Exception {
         TemporalVector a = new TemporalVector();
         TemporalVector b = new TemporalVector();

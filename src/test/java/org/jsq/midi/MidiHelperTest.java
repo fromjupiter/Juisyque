@@ -17,7 +17,7 @@ public class MidiHelperTest {
         MusicSheet score = new MusicSheet();
         score.setTempo(70);
         score.setTimeSignature("3/4");
-        score.setSpeedMultiplier(8);
+        score.setSpeedMultiplier(8.0);
 
         TemporalVector chords = new TemporalVector(TestHelper.getTestChords());
         TemporalVector melody = new TemporalVector(TestHelper.getTestMelody());
@@ -32,7 +32,7 @@ public class MidiHelperTest {
         MusicSheet score = new MusicSheet();
         score.setTempo(70);
         score.setTimeSignature("3/4");
-        score.setSpeedMultiplier(1);
+        score.setSpeedMultiplier(1.0);
 
         TemporalVector chords = new TemporalVector(TestHelper.getTestChords());
         TemporalVector melody = new TemporalVector(TestHelper.getTestMelody());

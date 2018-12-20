@@ -4,27 +4,30 @@ import org.jsq.antlr.Variable;
 import org.jsq.antlr.Variables;
 import org.jsq.antlr.generated.JuisyqueParser;
 import org.jsq.antlr.visitor.generic.DefaultStatelessVisitor;
+import org.jsq.exception.JsqInvalidLogicException;
 
 public class AssignmentVisitor implements DefaultStatelessVisitor<JuisyqueParser.AssignmentContext, Variables> {
 
     @Override
     public Variables visit(JuisyqueParser.AssignmentContext ctx, Variables world) {
-        if (ctx==null) return world;
+        if (ctx == null) return world;
 
-        if(ctx.index_expr() != null) {
-            throw new UnsupportedOperationException("LATER");
-        } else {
-            Object rvalue = new ExprVisitor().visit(ctx.expr(), world);
+        if (ctx.index_expr() != null) throw new UnsupportedOperationException("LATER");
 
-            String varName;
-            if (ctx.variable().name().ID() != null)
-                varName = ctx.variable().name().ID().getText();
-            else
-                varName = ctx.variable().name().NOTE().getText();
+        Object rvalue = new ExprVisitor().visit(ctx.expr(), world);
 
+        String varName;
+        //parser trick
+        if (ctx.variable().name().ID() != null)
+            varName = ctx.variable().name().ID().getText();
+        else
+            varName = ctx.variable().name().NOTE().getText();
+
+        if(!world.containsKey(varName) || world.get(varName).getClass().equals(rvalue)) {
             world.update(varName, new Variable(varName, rvalue));
+            return world;
         }
 
-        return world;
+        throw new JsqInvalidLogicException(String.format("Trying to assign variable [%s] with inconsistent type data",varName));
     }
 }

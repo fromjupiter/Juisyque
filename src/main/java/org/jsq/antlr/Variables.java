@@ -1,7 +1,5 @@
 package org.jsq.antlr;
 
-import org.jsq.exception.JsqInvalidAttributeException;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;

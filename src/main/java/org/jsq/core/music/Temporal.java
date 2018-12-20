@@ -3,7 +3,7 @@ package org.jsq.core.music;
 import lombok.Getter;
 import lombok.Setter;
 import org.jsq.core.basic.Volume;
-import org.jsq.exception.JsqInvalidAttributeException;
+import org.jsq.exception.JsqInvalidLogicException;
 
 public abstract class Temporal<T> {
 
@@ -25,7 +25,7 @@ public abstract class Temporal<T> {
     public Double getTimeSpan() { return timeSpan; }
 
     public void setTimeSpan(Double span) {
-        if(span < 0) throw new JsqInvalidAttributeException("Time span should be positive value");
+        if(span < 0) throw new JsqInvalidLogicException("Time span should be positive value");
         this.timeSpan = span;
     }
 

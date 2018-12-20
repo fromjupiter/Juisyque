@@ -19,7 +19,7 @@ public class MidiBuilderTest {
         score = new MusicSheet();
         score.setTempo(120);
         score.setOctaveOffset(1);
-        score.setSpeedMultiplier(1);
+        score.setSpeedMultiplier(1.0);
         score.setTimeSignature("3/4");
 
         TemporalVector chords = new TemporalVector(TestHelper.getTestChords());

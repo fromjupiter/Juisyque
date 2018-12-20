@@ -1,6 +1,6 @@
 package org.jsq;
 
-import org.jsq.exception.JsqInvalidAttributeException;
+import org.jsq.exception.JsqInvalidLogicException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -20,7 +20,7 @@ public class MusicSheetTest {
         Assert.assertEquals("3/4", score.getTimeSignature());
     }
 
-    @Test(expected = JsqInvalidAttributeException.class)
+    @Test(expected = JsqInvalidLogicException.class)
     public void testTimeSignature003() throws Exception {
         MusicSheet score = new MusicSheet();
 

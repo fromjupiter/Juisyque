@@ -1,7 +1,5 @@
 package org.jsq.core.basic;
 
-import org.jsq.exception.JsqInvalidAttributeException;
-
 public class Volume {
 
     private int value;

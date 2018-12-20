@@ -1,25 +1,25 @@
 package org.jsq.exception;
 
-public class JsqInvalidAttributeException extends RuntimeException {
+public class JsqInvalidLogicException extends RuntimeException {
     private static final long serialVersionUID = 1351179695646884185L;
     private int index;
     private int start;
     private int end;
-    public JsqInvalidAttributeException(String msg){
+    public JsqInvalidLogicException(String msg){
         super(msg);
     }
 
-    public JsqInvalidAttributeException(String msg, Throwable cause){
+    public JsqInvalidLogicException(String msg, Throwable cause){
         super(msg, cause);
     }
 
-    public JsqInvalidAttributeException(int start, int end,String msg){
+    public JsqInvalidLogicException(int start, int end, String msg){
         super(msg);
         this.start = start;
         this.end = end;
     }
 
-    public JsqInvalidAttributeException(int index,int start, int end,String msg){
+    public JsqInvalidLogicException(int index, int start, int end, String msg){
         super(msg);
         this.index = index;
         this.start = start;
