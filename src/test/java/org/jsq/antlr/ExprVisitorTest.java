@@ -1,7 +1,7 @@
 package org.jsq.antlr;
 
 import org.jsq.core.basic.Pitch;
-import org.jsq.core.note.PitchNote;
+import org.jsq.core.music.Note;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,6 +19,6 @@ public class ExprVisitorTest {
         Variables variables = (Variables)res;
         Assert.assertTrue(variables.containsKey("gsharp"));
 
-        Assert.assertEquals(new PitchNote(Pitch.construct(Pitch.Step.GSHARP, 4)), variables.get("gsharp").getValue());
+        Assert.assertEquals(new Note(Pitch.construct(Pitch.Step.GSHARP, 4)), variables.get("gsharp").getValue());
     }
 }

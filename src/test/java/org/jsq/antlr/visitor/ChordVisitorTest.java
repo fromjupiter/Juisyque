@@ -1,11 +1,9 @@
 package org.jsq.antlr.visitor;
 
-import org.antlr.v4.runtime.tree.TerminalNode;
 import org.jsq.antlr.Variables;
 import org.jsq.antlr.generated.JuisyqueParser;
-import org.jsq.core.basic.Chord;
 import org.jsq.core.basic.Pitch;
-import org.jsq.core.note.PitchNote;
+import org.jsq.core.music.Chord;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -17,7 +15,6 @@ import org.mockito.junit.MockitoRule;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -50,8 +47,8 @@ public class ChordVisitorTest {
         Variables variables = new Variables();
         Chord res = (Chord) new ChordVisitor().visit(ctx,variables);
 
-        Assert.assertEquals(Pitch.construct(Pitch.Step.G, 0),res.get(0));
-        Assert.assertEquals(Pitch.construct(Pitch.Step.B, 0),res.get(1));
-        Assert.assertEquals(Pitch.construct(Pitch.Step.D, 1),res.get(2));
+        Assert.assertEquals(Pitch.construct(Pitch.Step.G, 0),res.get(0).getPitch());
+        Assert.assertEquals(Pitch.construct(Pitch.Step.B, 0),res.get(1).getPitch());
+        Assert.assertEquals(Pitch.construct(Pitch.Step.D, 1),res.get(2).getPitch());
     }
 }

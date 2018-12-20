@@ -1,6 +1,6 @@
 package org.jsq.exception;
 
-public class JsqInvalidAttributeException extends Exception {
+public class JsqInvalidAttributeException extends RuntimeException {
     private static final long serialVersionUID = 1351179695646884185L;
     private int index;
     private int start;

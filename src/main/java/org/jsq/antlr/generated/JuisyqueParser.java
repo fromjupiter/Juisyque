@@ -33,7 +33,7 @@ public class JuisyqueParser extends Parser {
 		RULE_arg = 20;
 	public static final String[] ruleNames = {
 		"stmts", "stmt", "small_stmt", "assignment", "variable", "name", "expr", 
-		"index_expr", "atom", "note", "chord", "chord_element", "vector", "bar_delim", 
+		"index_expr", "atom", "music", "chord", "chord_element", "vector", "bar_delim",
 		"matrix", "dict", "dict_pair", "function_call", "func_name", "args", "arg"
 	};
 

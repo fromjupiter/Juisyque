@@ -2,7 +2,7 @@ package org.jsq;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.jsq.core.NoteMatrix;
+import org.jsq.core.TemporalMatrix;
 import org.jsq.exception.JsqInvalidAttributeException;
 
 import java.util.HashMap;
@@ -12,7 +12,7 @@ public class MusicSheet {
 
     @Getter
     @Setter
-    public NoteMatrix score;
+    public TemporalMatrix score;
 
     @Getter
     @Setter

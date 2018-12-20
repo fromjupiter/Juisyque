@@ -1,11 +1,8 @@
 package org.jsq;
 
 import org.jsq.core.basic.Pitch;
-import org.jsq.core.note.PitchNote;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class NoteUtilsTest {
 
