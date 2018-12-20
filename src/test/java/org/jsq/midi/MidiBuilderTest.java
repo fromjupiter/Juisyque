@@ -1,8 +1,8 @@
 package org.jsq.midi;
 
 import org.jsq.MusicSheet;
-import org.jsq.core.NoteMatrix;
-import org.jsq.core.NoteVector;
+import org.jsq.core.TemporalMatrix;
+import org.jsq.core.TemporalVector;
 import org.jsq.core.TestHelper;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -12,21 +12,21 @@ import java.util.Arrays;
 
 public class MidiBuilderTest {
 
-    MusicSheet score;
+    private MusicSheet score;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         score = new MusicSheet();
         score.setTempo(120);
         score.setOctaveOffset(1);
         score.setSpeedMultiplier(1);
         score.setTimeSignature("3/4");
 
-        NoteVector chords = new NoteVector(TestHelper.getTestChords());
-        NoteVector melody = new NoteVector(TestHelper.getTestMelody());
-        score.setScore(new NoteMatrix(Arrays.asList(chords, melody)));
-        //score.setScore(new NoteMatrix(Arrays.asList(chords)));
-        //score.setScore(new NoteMatrix(Arrays.asList(melody)));
+        TemporalVector chords = new TemporalVector(TestHelper.getTestChords());
+        TemporalVector melody = new TemporalVector(TestHelper.getTestMelody());
+        score.setScore(new TemporalMatrix(Arrays.asList(chords, melody)));
+        //score.setScore(new TemporalMatrix(Arrays.asList(chords)));
+        //score.setScore(new TemporalMatrix(Arrays.asList(melody)));
 
     }
 

@@ -4,18 +4,20 @@ import javafx.util.Pair;
 import lombok.Getter;
 import org.jsq.MusicSheet;
 import org.jsq.core.basic.Pitch;
-import org.jsq.core.basic.Symbol;
+import org.jsq.core.basic.Control;
 import org.jsq.core.generic.Vector;
-import org.jsq.core.note.ChordNote;
-import org.jsq.core.note.Note;
-import org.jsq.core.note.PitchNote;
-import org.jsq.core.note.SymbolNote;
+import org.jsq.core.music.Chord;
+import org.jsq.core.music.Temporal;
+import org.jsq.core.music.Note;
+import org.jsq.core.music.ControlTemporal;
 import org.jsq.exception.JsqInvalidAttributeException;
 
 import javax.sound.midi.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public class MidiBuilder {
 
@@ -52,7 +54,7 @@ public class MidiBuilder {
 
 
     private void initSequence() throws JsqInvalidAttributeException {
-        //calculate Pulses Per Quarter note
+        //calculate Pulses Per Quarter music
         int pulsePerQuarter = MidiHelper.getPPQ(this.scores);
 
         try{
@@ -93,11 +95,11 @@ public class MidiBuilder {
         track.add(MidiHelper.createNoteEvent(ShortMessage.CONTROL_CHANGE,nChannel,32, instrumentInfo.getKey()&0x7f, 0));
         track.add(MidiHelper.createNoteEvent(ShortMessage.PROGRAM_CHANGE,nChannel,instrumentInfo.getValue(), 0, 0));
 
-        for (Vector<Note> vec : sheet.getScore()) {
+        for (Vector<Temporal> vec : sheet.getScore()) {
             long tickCursor = 0;
             List<MidiEvent> offEventsCache = new ArrayList<>();
-            for(Note note : vec ) {
-                if (note instanceof SymbolNote && ((SymbolNote)note).getSymbol().getType()== Symbol.Type.TENUTO) {
+            for(Temporal note : vec ) {
+                if (note instanceof ControlTemporal && ((ControlTemporal)note).getValue().getType()== Control.Type.TENUTO) {
                     //update cache
                     for (MidiEvent event : offEventsCache) {
                         event.setTick(event.getTick() + MidiHelper.getNoteTick(ppq, sheet.getSpeedMultiplier(), note));
@@ -108,15 +110,15 @@ public class MidiBuilder {
                     offEventsCache.clear();
                 }
 
-                if(note instanceof PitchNote) {
-                    PitchNote pn = (PitchNote) note;
+                if(note instanceof Note) {
+                    Note pn = (Note) note;
                     track.add(MidiHelper.createNoteEvent(ShortMessage.NOTE_ON,nChannel,pn.getPitch().toMidiKey(offset), note.getVolume().toMidiVelocity()
                             ,tickCursor));
                     offEventsCache.add(MidiHelper.createNoteEvent(ShortMessage.NOTE_OFF,nChannel,pn.getPitch().toMidiKey(offset), note.getVolume().toMidiVelocity()
                             ,tickCursor+MidiHelper.getNoteTick(ppq, sheet.getSpeedMultiplier(), note)));
-                } else if (note instanceof ChordNote) {
-                    ChordNote cn = (ChordNote) note;
-                    for (Pitch pitch : cn.getChord()) {
+                } else if (note instanceof Chord) {
+                    Chord chord = (Chord) note;
+                    for (Pitch pitch : StreamSupport.stream(chord.spliterator(),false).map(Note::getPitch).collect(Collectors.toList())) {
                         track.add(MidiHelper.createNoteEvent(ShortMessage.NOTE_ON,nChannel,pitch.toMidiKey(offset), note.getVolume().toMidiVelocity()
                                 ,tickCursor));
                         offEventsCache.add(MidiHelper.createNoteEvent(ShortMessage.NOTE_OFF,nChannel,pitch.toMidiKey(offset), note.getVolume().toMidiVelocity()

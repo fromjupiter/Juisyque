@@ -2,7 +2,7 @@ package org.jsq.midi;
 
 import javafx.util.Pair;
 import org.jsq.MusicSheet;
-import org.jsq.core.note.Note;
+import org.jsq.core.music.Temporal;
 import org.jsq.exception.JsqInvalidAttributeException;
 
 import javax.sound.midi.InvalidMidiDataException;
@@ -22,8 +22,8 @@ public class MidiHelper {
         for(MusicSheet sheet: sheets) {
             for (int i=0; i < sheet.getScore().size(); ++i) {
                 for (int j = 0; j < sheet.getScore().get(i).size(); ++j) {
-                    Note note = sheet.getScore().get(i, j);
-                    // second argument represents how many quarter notes the note lasts
+                    Temporal note = sheet.getScore().get(i, j);
+                    // second argument represents how many quarter notes the music lasts
                     gcd = MidiHelper.GCD(gcd, 4 * note.getTimeSpan() * note.getSpanBase() / sheet.getSpeedMultiplier());
                 }
                 //validate
@@ -41,10 +41,10 @@ public class MidiHelper {
         return (int) Math.round(result);
     }
 
-    public static int getNoteTick(int ppq, double speedMultiplier, Note note) throws JsqInvalidAttributeException {
+    public static int getNoteTick(int ppq, double speedMultiplier, Temporal note) throws JsqInvalidAttributeException {
         long result = Math.round( ppq * 4 * note.getTimeSpan() * note.getSpanBase() /speedMultiplier );
         if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
-            throw new JsqInvalidAttributeException(String.format("Calculated tick [%d] of note [%s] is out of boundary",result, note));
+            throw new JsqInvalidAttributeException(String.format("Calculated tick [%d] of music [%s] is out of boundary",result, note));
         }
         return (int)result;
     }
@@ -62,8 +62,7 @@ public class MidiHelper {
             e.printStackTrace();
             System.exit(1);
         }
-        MidiEvent event = new MidiEvent(message, lTick);
-        return event;
+        return new MidiEvent(message, lTick);
     }
 
     public static MidiEvent createMetaEvent(int status,byte[] data,long lTick){
@@ -75,8 +74,7 @@ public class MidiHelper {
             e.printStackTrace();
             System.exit(1);
         }
-        MidiEvent event = new MidiEvent(message, lTick);
-        return event;
+        return new MidiEvent(message, lTick);
     }
 
     /*

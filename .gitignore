@@ -1,5 +1,6 @@
 .idea/*
 
+*.midi
 *.class
 *.log
 *.ctxt

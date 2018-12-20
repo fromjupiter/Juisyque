@@ -1,8 +1,8 @@
 package org.jsq.midi;
 
 import org.jsq.MusicSheet;
-import org.jsq.core.NoteMatrix;
-import org.jsq.core.NoteVector;
+import org.jsq.core.TemporalMatrix;
+import org.jsq.core.TemporalVector;
 import org.jsq.core.TestHelper;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,30 +13,30 @@ public class MidiHelperTest {
 
     private double testDelta = 0.000001;
     @Test
-    public void testPPQ() throws Exception {
+    public void testPPQ() {
         MusicSheet score = new MusicSheet();
         score.setTempo(70);
         score.setTimeSignature("3/4");
         score.setSpeedMultiplier(8);
 
-        NoteVector chords = new NoteVector(TestHelper.getTestChords());
-        NoteVector melody = new NoteVector(TestHelper.getTestMelody());
-        score.setScore(new NoteMatrix(Arrays.asList(chords, melody)));
+        TemporalVector chords = new TemporalVector(TestHelper.getTestChords());
+        TemporalVector melody = new TemporalVector(TestHelper.getTestMelody());
+        score.setScore(new TemporalMatrix(Arrays.asList(chords, melody)));
 
         int result = MidiHelper.getPPQ(Arrays.asList(score));
         Assert.assertEquals(16, result);
     }
 
     @Test
-    public void testGetNoteTick() throws Exception {
+    public void testGetNoteTick() {
         MusicSheet score = new MusicSheet();
         score.setTempo(70);
         score.setTimeSignature("3/4");
         score.setSpeedMultiplier(1);
 
-        NoteVector chords = new NoteVector(TestHelper.getTestChords());
-        NoteVector melody = new NoteVector(TestHelper.getTestMelody());
-        score.setScore(new NoteMatrix(Arrays.asList(chords, melody)));
+        TemporalVector chords = new TemporalVector(TestHelper.getTestChords());
+        TemporalVector melody = new TemporalVector(TestHelper.getTestMelody());
+        score.setScore(new TemporalMatrix(Arrays.asList(chords, melody)));
 
         int ppq = MidiHelper.getPPQ(Arrays.asList(score));
 

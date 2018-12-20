@@ -1,8 +1,8 @@
 package org.jsq.core;
 
-import org.jsq.core.note.ChordNote;
-import org.jsq.core.note.PitchNote;
-import org.jsq.core.note.SymbolNote;
+import org.jsq.core.music.Chord;
+import org.jsq.core.music.Note;
+import org.jsq.core.music.ControlTemporal;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,32 +10,32 @@ import org.junit.Test;
 import static org.jsq.core.TestHelper.*;
 
 
-public class NoteVectorTest {
+public class TemporalVectorTest {
 
-    NoteVector target;
+    private TemporalVector target;
 
     @Before
     public void setUp() {
-        target = new NoteVector();
+        target = new TemporalVector();
 
-        target.add(new ChordNote(cC3, 0.75));
-        target.add(new ChordNote(cC3, 0.75));
-        target.add(new ChordNote(cG3, 0.75));
-        target.add(new ChordNote(cF3, 0.75));
+        target.add(new Chord(cC3, 0.75));
+        target.add(new Chord(cC3, 0.75));
+        target.add(new Chord(cG3, 0.75));
+        target.add(new Chord(cF3, 0.75));
     }
 
     @Test
     public void testAdd001() {
-        target.add(new SymbolNote(rest));
+        target.add(new ControlTemporal(rest));
         Assert.assertEquals(5, target.size());
         Assert.assertEquals(4, target.length(), 0);
     }
 
     @Test
     public void testAdd002() {
-        target.add(2, new PitchNote(pSo, 1.0));
+        target.add(2, new Note(pSo, 1.0));
         Assert.assertEquals(target.get(2).getTimeSpan(), 1.0, 0);
-        Assert.assertEquals(((PitchNote)target.get(2)).getPitch(), pSo);
+        Assert.assertEquals(((Note)target.get(2)).getPitch(), pSo);
     }
 
     @Test
@@ -56,8 +56,8 @@ public class NoteVectorTest {
 
     @Test
     public void testLength004() {
-        NoteVector chords = new NoteVector(TestHelper.getTestChords());
-        NoteVector melody = new NoteVector(TestHelper.getTestMelody());
+        TemporalVector chords = new TemporalVector(TestHelper.getTestChords());
+        TemporalVector melody = new TemporalVector(TestHelper.getTestMelody());
         Assert.assertEquals(chords.length(), melody.length(), 0);
 
     }
