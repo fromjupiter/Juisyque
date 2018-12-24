@@ -19,10 +19,22 @@ public class AtomVisitor implements StatelessVisitor<JuisyqueParser.AtomContext,
             return new DictVisitor().visit(ctx.dict(), world);
         } else if(ctx.variable()!=null) {
             String name = ctx.variable().name().getText();
-            if(!world.containsKey(name)) throw new JsqInvalidLogicException(String.format("Variable name [%s] is not found in the context!", name));
+            if (!world.containsKey(name))
+                throw new JsqInvalidLogicException(String.format("Variable name [%s] is not found in the context!", name));
             return world.get(name).getValue();
+        } else if(ctx.number() != null) {
+            return visitNumber(ctx.number());
+        } else if(ctx.STRING() != null) {
+            String rawStr = ctx.STRING().getText();
+            return rawStr.substring(1, rawStr.length()-1);
         } else {
-            throw new UnsupportedOperationException("LATER");
+            throw new UnsupportedOperationException(String.format("Token [%s] not recognized.", ctx.children.get(0).getText()));
         }
+    }
+
+    private Number visitNumber(JuisyqueParser.NumberContext ctx) {
+        if(ctx.FLOAT() != null) return Double.parseDouble(ctx.FLOAT().getText());
+        else if(ctx.INT() != null) return Integer.parseInt(ctx.INT().getText());
+        else throw new JsqInvalidLogicException(String.format("Unrecognized number type [%s]", ctx.getText()));
     }
 }

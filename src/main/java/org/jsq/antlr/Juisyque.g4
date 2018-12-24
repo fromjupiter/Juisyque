@@ -53,8 +53,8 @@ atom
     |dict
     |variable
     |function_call
+    |number
     |STRING
-    |NUMBER
 ;
 
 note
@@ -124,17 +124,17 @@ arg
     expr
 ;
 
+number
+:
+    INT
+    |FLOAT
+;
+
 // DSL important tokens
 
 STRING :
     '\'' .*? '\''
     | '"' .*? '"'
-;
-
-NUMBER
-:
-    INT
-    |FLOAT
 ;
 
 OCTAVE

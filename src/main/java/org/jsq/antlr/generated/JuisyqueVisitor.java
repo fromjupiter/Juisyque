@@ -136,4 +136,10 @@ public interface JuisyqueVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitArg(JuisyqueParser.ArgContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JuisyqueParser#number}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNumber(JuisyqueParser.NumberContext ctx);
 }
