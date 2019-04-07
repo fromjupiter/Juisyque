@@ -1,8 +1,8 @@
-package org.jsq.core;
+package org.jsq.music;
 
-import org.jsq.core.generic.Matrix;
-import org.jsq.core.generic.Vector;
-import org.jsq.core.music.Temporal;
+import org.jsq.music.generic.Matrix;
+import org.jsq.music.generic.Vector;
+import org.jsq.music.core.Temporal;
 import org.jsq.exception.JsqInvalidLogicException;
 import org.jsq.exception.JsqUnsupportedException;
 

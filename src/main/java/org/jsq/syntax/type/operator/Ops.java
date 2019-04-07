@@ -1,6 +1,6 @@
-package org.jsq.syntax;
+package org.jsq.syntax.type.operator;
 
-public enum Op {
+public enum Ops {
     Add("+"),
     MINUS("-"),
     TIMES("*"),
@@ -9,12 +9,12 @@ public enum Op {
     BITIMES("**");
 
     private String value;
-    Op(String symbol) {this.value = symbol;}
+    Ops(String symbol) {this.value = symbol;}
 
     public String symbol() {return value;}
 
-    public static Op fromSymbol(String symbol) {
-        for(Op o:Op.values()) {
+    public static Ops fromSymbol(String symbol) {
+        for(Ops o: Ops.values()) {
             if(o.value.equals(symbol)){
                 return o;
             }

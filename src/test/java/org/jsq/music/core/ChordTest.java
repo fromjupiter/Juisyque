@@ -1,4 +1,4 @@
-package org.jsq.core.music;
+package org.jsq.music.core;
 
 import org.jsq.NoteUtils;
 import org.junit.Assert;

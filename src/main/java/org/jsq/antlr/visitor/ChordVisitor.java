@@ -4,8 +4,8 @@ import org.jsq.NoteUtils;
 import org.jsq.antlr.Variables;
 import org.jsq.antlr.generated.JuisyqueParser;
 import org.jsq.antlr.visitor.generic.StatelessVisitor;
-import org.jsq.core.music.Chord;
-import org.jsq.core.music.Note;
+import org.jsq.music.core.Chord;
+import org.jsq.music.core.Note;
 
 import java.util.List;
 import java.util.stream.Collectors;

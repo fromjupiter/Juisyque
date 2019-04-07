@@ -1,4 +1,4 @@
-package org.jsq.core.basic;
+package org.jsq.music.attr;
 
 public class Volume {
 

@@ -1,7 +1,7 @@
-package org.jsq.core;
+package org.jsq.music;
 
-import org.jsq.core.generic.Vector;
-import org.jsq.core.music.Temporal;
+import org.jsq.music.generic.Vector;
+import org.jsq.music.core.Temporal;
 
 import java.util.ArrayList;
 import java.util.List;

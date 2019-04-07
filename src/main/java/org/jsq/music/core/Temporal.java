@@ -1,8 +1,8 @@
-package org.jsq.core.music;
+package org.jsq.music.core;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.jsq.core.basic.Volume;
+import org.jsq.music.attr.Volume;
 import org.jsq.exception.JsqInvalidLogicException;
 
 public abstract class Temporal<T> {
@@ -12,7 +12,7 @@ public abstract class Temporal<T> {
     protected Double timeSpan = 1.0;
 
     /*
-        Default time span unit is a full music (1.0)
+        Default time span unit is a full core (1.0)
      */
     @Getter
     @Setter

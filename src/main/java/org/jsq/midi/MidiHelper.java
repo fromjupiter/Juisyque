@@ -2,7 +2,7 @@ package org.jsq.midi;
 
 import javafx.util.Pair;
 import org.jsq.MusicSheet;
-import org.jsq.core.music.Temporal;
+import org.jsq.music.core.Temporal;
 import org.jsq.exception.JsqInvalidLogicException;
 
 import javax.sound.midi.InvalidMidiDataException;
@@ -23,7 +23,7 @@ public class MidiHelper {
             for (int i=0; i < sheet.getScore().size(); ++i) {
                 for (int j = 0; j < sheet.getScore().get(i).size(); ++j) {
                     Temporal note = sheet.getScore().get(i, j);
-                    // second argument represents how many quarter notes the music lasts
+                    // second argument represents how many quarter notes the core lasts
                     gcd = MidiHelper.GCD(gcd, 4 * note.getTimeSpan() * note.getSpanBase() / sheet.getSpeedMultiplier());
                 }
                 //validate
@@ -35,7 +35,7 @@ public class MidiHelper {
         //int gcd = scores.get(0).getScore().get(0).
 
         if(result > 128 || Math.abs(Math.round(result) - result) > 1e-5) {
-            throw new JsqInvalidLogicException("Can't find proper PPQ for the music sheets");
+            throw new JsqInvalidLogicException("Can't find proper PPQ for the core sheets");
         }
 
         return (int) Math.round(result);
@@ -44,7 +44,7 @@ public class MidiHelper {
     public static int getNoteTick(int ppq, double speedMultiplier, Temporal note) throws JsqInvalidLogicException {
         long result = Math.round( ppq * 4 * note.getTimeSpan() * note.getSpanBase() /speedMultiplier );
         if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
-            throw new JsqInvalidLogicException(String.format("Calculated tick [%d] of music [%s] is out of boundary",result, note));
+            throw new JsqInvalidLogicException(String.format("Calculated tick [%d] of core [%s] is out of boundary",result, note));
         }
         return (int)result;
     }

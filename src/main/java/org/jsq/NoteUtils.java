@@ -1,10 +1,10 @@
 package org.jsq;
 
-import org.jsq.core.basic.Pitch;
-import org.jsq.core.basic.Control;
-import org.jsq.core.music.Temporal;
-import org.jsq.core.music.Note;
-import org.jsq.core.music.ControlTemporal;
+import org.jsq.music.attr.Pitch;
+import org.jsq.music.attr.Control;
+import org.jsq.music.core.Temporal;
+import org.jsq.music.core.Note;
+import org.jsq.music.core.ControlTemporal;
 import org.jsq.exception.JsqUnsupportedException;
 
 public class NoteUtils {

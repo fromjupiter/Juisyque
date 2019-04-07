@@ -1,6 +1,6 @@
-package org.jsq.core.music;
+package org.jsq.music.core;
 
-import org.jsq.core.basic.Pitch;
+import org.jsq.music.attr.Pitch;
 
 public final class Note extends Temporal<Pitch> {
 

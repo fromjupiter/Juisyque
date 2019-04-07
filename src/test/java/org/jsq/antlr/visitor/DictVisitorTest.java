@@ -3,6 +3,7 @@ package org.jsq.antlr.visitor;
 import org.jsq.antlr.Juisyque;
 import org.jsq.antlr.Variables;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -11,7 +12,12 @@ import java.util.Map;
 import static org.junit.Assert.*;
 
 public class DictVisitorTest {
-    public static Juisyque jsq = new Juisyque();
+    public static Juisyque jsq;
+
+    @Before
+    public void init() {
+        jsq = new Juisyque();
+    }
 
     @Test
     public void testVisit001() throws Exception {

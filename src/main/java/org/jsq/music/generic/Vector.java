@@ -1,11 +1,10 @@
-package org.jsq.core.generic;
+package org.jsq.music.generic;
 
 import org.jsq.exception.JsqUnsupportedException;
 
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
-import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 
 public abstract class Vector<T> implements Collection<T> {

@@ -1,8 +1,4 @@
-package org.jsq.core.generic;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+package org.jsq.music.generic;
 
 public abstract class Matrix<T> extends Vector<Vector<T>> {
 

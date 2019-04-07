@@ -1,9 +1,9 @@
 package org.jsq.midi;
 
 import org.jsq.MusicSheet;
-import org.jsq.core.TemporalMatrix;
-import org.jsq.core.TemporalVector;
-import org.jsq.core.TestHelper;
+import org.jsq.music.TemporalMatrix;
+import org.jsq.music.TemporalVector;
+import org.jsq.music.TestHelper;
 import org.junit.Assert;
 import org.junit.Test;
 

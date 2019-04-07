@@ -3,13 +3,13 @@ package org.jsq.midi;
 import javafx.util.Pair;
 import lombok.Getter;
 import org.jsq.MusicSheet;
-import org.jsq.core.basic.Pitch;
-import org.jsq.core.basic.Control;
-import org.jsq.core.generic.Vector;
-import org.jsq.core.music.Chord;
-import org.jsq.core.music.Temporal;
-import org.jsq.core.music.Note;
-import org.jsq.core.music.ControlTemporal;
+import org.jsq.music.attr.Pitch;
+import org.jsq.music.attr.Control;
+import org.jsq.music.generic.Vector;
+import org.jsq.music.core.Chord;
+import org.jsq.music.core.Temporal;
+import org.jsq.music.core.Note;
+import org.jsq.music.core.ControlTemporal;
 import org.jsq.exception.JsqInvalidLogicException;
 
 import javax.sound.midi.*;
@@ -54,7 +54,7 @@ public class MidiBuilder {
 
 
     private void initSequence() throws JsqInvalidLogicException {
-        //calculate Pulses Per Quarter music
+        //calculate Pulses Per Quarter core
         int pulsePerQuarter = MidiHelper.getPPQ(this.scores);
 
         try{

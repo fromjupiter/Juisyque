@@ -1,7 +1,7 @@
-package org.jsq.core;
+package org.jsq.music;
 
-import org.jsq.core.music.Chord;
-import org.jsq.core.music.ControlTemporal;
+import org.jsq.music.core.Chord;
+import org.jsq.music.core.ControlTemporal;
 import org.jsq.exception.JsqInvalidLogicException;
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.jsq.core.TestHelper.*;
+import static org.jsq.music.TestHelper.*;
 
 public class TemporalMatrixTest {
 

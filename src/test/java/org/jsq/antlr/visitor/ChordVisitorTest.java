@@ -2,8 +2,8 @@ package org.jsq.antlr.visitor;
 
 import org.jsq.antlr.Variables;
 import org.jsq.antlr.generated.JuisyqueParser;
-import org.jsq.core.basic.Pitch;
-import org.jsq.core.music.Chord;
+import org.jsq.music.attr.Pitch;
+import org.jsq.music.core.Chord;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;

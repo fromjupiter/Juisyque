@@ -12,22 +12,19 @@ public class AssignmentVisitor implements DefaultStatelessVisitor<JuisyqueParser
     public Variables visit(JuisyqueParser.AssignmentContext ctx, Variables world) {
         if (ctx == null) return world;
 
+        String variableName;
+        String keyName;
+
         if (ctx.index_expr() != null) throw new UnsupportedOperationException("LATER");
+        //parser trick
+        variableName = ctx.variable().name().ID() != null ? ctx.variable().name().ID().getText() : ctx.variable().name().NOTE().getText();
 
         Object rvalue = new ExprVisitor().visit(ctx.expr(), world);
-
-        String varName;
-        //parser trick
-        if (ctx.variable().name().ID() != null)
-            varName = ctx.variable().name().ID().getText();
-        else
-            varName = ctx.variable().name().NOTE().getText();
-
-        if(!world.containsKey(varName) || world.get(varName).getClass().equals(rvalue)) {
-            world.update(varName, new Variable(varName, rvalue));
+        if(!world.containsKey(variableName) || world.get(variableName).getClass().equals(rvalue)) {
+            world.update(variableName, new Variable(variableName, rvalue));
             return world;
         }
 
-        throw new JsqInvalidLogicException(String.format("Trying to assign variable [%s] with inconsistent type data",varName));
+        throw new JsqInvalidLogicException(String.format("Trying to assign variable [%s] with inconsistent type data",variableName));
     }
 }

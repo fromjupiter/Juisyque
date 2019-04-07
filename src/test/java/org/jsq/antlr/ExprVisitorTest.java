@@ -1,9 +1,9 @@
 package org.jsq.antlr;
 
 import org.jsq.NoteUtils;
-import org.jsq.core.basic.Pitch;
-import org.jsq.core.music.Chord;
-import org.jsq.core.music.Note;
+import org.jsq.music.attr.Pitch;
+import org.jsq.music.core.Chord;
+import org.jsq.music.core.Note;
 import org.junit.Assert;
 import org.junit.Test;
 

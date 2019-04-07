@@ -1,6 +1,6 @@
-package org.jsq.core.music;
+package org.jsq.music.core;
 
-import org.jsq.core.basic.Control;
+import org.jsq.music.attr.Control;
 
 public class ControlTemporal extends Temporal<Control> {
 

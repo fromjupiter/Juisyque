@@ -2,7 +2,7 @@ package org.jsq;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.jsq.core.TemporalMatrix;
+import org.jsq.music.TemporalMatrix;
 import org.jsq.exception.JsqInvalidLogicException;
 
 import java.util.HashMap;

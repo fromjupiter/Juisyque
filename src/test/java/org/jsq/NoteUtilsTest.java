@@ -1,6 +1,6 @@
 package org.jsq;
 
-import org.jsq.core.basic.Pitch;
+import org.jsq.music.attr.Pitch;
 import org.junit.Assert;
 import org.junit.Test;
 

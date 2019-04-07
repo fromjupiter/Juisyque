@@ -1,18 +1,18 @@
-package org.jsq.core;
+package org.jsq.music;
 
-import org.jsq.core.basic.Pitch;
-import org.jsq.core.basic.Control;
-import org.jsq.core.music.Chord;
-import org.jsq.core.music.Temporal;
-import org.jsq.core.music.Note;
-import org.jsq.core.music.ControlTemporal;
+import org.jsq.music.attr.Pitch;
+import org.jsq.music.attr.Control;
+import org.jsq.music.core.Chord;
+import org.jsq.music.core.Temporal;
+import org.jsq.music.core.Note;
+import org.jsq.music.core.ControlTemporal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class TestHelper {
-    // basic pitch
+    // attr pitch
     static final Pitch pDo = Pitch.construct(Pitch.Step.C, 4);
     static final Pitch pRe = Pitch.construct(Pitch.Step.D, 4);
     static final Pitch pMi = Pitch.construct(Pitch.Step.E, 4);
@@ -33,7 +33,7 @@ public class TestHelper {
     static final Control tenuto = Control.construct(Control.Type.TENUTO);
     static final Control rest = Control.construct(Control.Type.REST);
 
-    //basic chord
+    //attr chord
     static final List<Pitch> cC3 = Arrays.asList(pDo, pMi, pSo);
     static final List<Pitch> cG3 = Arrays.asList(pSo, pSi, pRe2);
     static final List<Pitch> cF3 = Arrays.asList(pFa, pLa, pDo2);
